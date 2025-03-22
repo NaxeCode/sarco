@@ -164,7 +164,8 @@ h2 {
 }
 
 .reset-button:hover:not(:disabled) {
-  background-color: var(--ctp-surface);
+  background-color: var(--muted);
+  color: var(--background);
   transform: translateY(-2px);
 }
 
@@ -221,21 +222,20 @@ h2 {
 .download-link {
   display: inline-block;
   margin-top: 1rem;
-  padding: 1rem 2rem;
-  background-color: var(--ctp-teal);
-  color: var(--ctp-surface);
+  padding: 10px 20px;
+  background-color: var(--accent);
+  color: var(--foreground);
   border-radius: 4px;
   text-decoration: none;
   font-weight: bold;
-  transition: all 0.3s;
-  color: var(--secondary);
+  transition: all 0.2s;
 }
 
 .download-link:hover {
-  background-color: var(--ctp-green);
+  background-color: var(--ctp-sapphire);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .logo {

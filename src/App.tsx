@@ -2,8 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
 import "./App.css";
 
-import "./App.css";
-
 function App() {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [targetFormat, setTargetFormat] = useState<string>("");
