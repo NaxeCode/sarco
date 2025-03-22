@@ -1,0 +1,98 @@
+:root {
+  /* Catppuccin Frappe Theme Colors (duplicated here to ensure consistent theming) */
+  --ctp-base: #303446;
+  --ctp-surface: #292c3c;
+  --ctp-overlay: #414559;
+  --ctp-text: #c6d0f5;
+  --ctp-subtext: #a5adce;
+  --ctp-rosewater: #f2d5cf;
+  --ctp-flamingo: #eebebe;
+  --ctp-pink: #f4b8e4;
+  --ctp-mauve: #ca9ee6;
+  --ctp-red: #e78284;
+  --ctp-maroon: #ea999c;
+  --ctp-peach: #ef9f76;
+  --ctp-yellow: #e5c890;
+  --ctp-green: #a6d189;
+  --ctp-teal: #81c8be;
+  --ctp-sky: #99d1db;
+  --ctp-sapphire: #85c1dc;
+  --ctp-blue: #8caaee;
+  --ctp-lavender: #babbf1;
+
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: var(--ctp-text);
+  background-color: var(--ctp-base);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: var(--ctp-blue);
+  text-decoration: inherit;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--ctp-sapphire);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--ctp-base);
+  color: var(--ctp-text);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: var(--ctp-lavender);
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--ctp-overlay);
+  color: var(--ctp-text);
+  cursor: pointer;
+  transition: border-color 0.25s, background-color 0.25s;
+}
+
+button:hover {
+  border-color: var(--ctp-blue);
+  background-color: var(--ctp-surface);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 2px solid var(--ctp-lavender);
+  outline-offset: 2px;
+}
+
+/* Remove light mode overrides since we're using Catppuccin Frappe theme only */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: var(--ctp-text);
+    background-color: var(--ctp-base);
+  }
+  a:hover {
+    color: var(--ctp-sapphire);
+  }
+  button {
+    background-color: var(--ctp-overlay);
+  }
+}
