@@ -1,4 +1,7 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { FaSun, FaMoon } from "react-icons/fa";
+import "./App.css";
+
 import "./App.css";
 
 function App() {
@@ -8,6 +11,29 @@ function App() {
     const [convertedFileUrl, setConvertedFileUrl] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const [theme, setTheme] = useState<string>("light");
+
+    useEffect(() => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            setTheme(prefersDark ? "dark" : "light");
+        }
+    }, []);
+
+    const toggleTheme = () => {
+        setTheme((prevTheme) => {
+            const newTheme = prevTheme === "light" ? "dark" : "light";
+            localStorage.setItem("theme", newTheme);
+            return newTheme;
+        });
+    };
+
+    useEffect(() => {
+        document.documentElement.setAttribute("data-theme", theme);
+    }, [theme]);
 
     // Available output formats for conversion
     const videoFormats = [
@@ -85,6 +111,20 @@ function App() {
 
     return (
         <div className="container">
+            <div className="theme-toggle-container">
+                <span className="theme-toggle-icon" aria-hidden="true">
+                    {theme === "dark" ? <FaMoon /> : <FaSun />}
+                </span>
+                <label className="theme-toggle-label">
+                    <input 
+                        type="checkbox" 
+                        checked={theme === "dark"} 
+                        onChange={toggleTheme} 
+                        className="theme-toggle-input"
+                    />
+                    <span className="theme-toggle-slider"></span>
+                </label>
+            </div>
             <h1>Media Converter</h1>
             
             <div className="upload-section">

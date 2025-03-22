@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
 
 :root {
   /* Catppuccin Frappe Theme Colors */
@@ -23,10 +24,33 @@
   --ctp-lavender: #babbf1;
 }
 
+/* Light mode (Catppuccin Latte theme) */
+:root[data-theme="light"] {
+    --background: #eff1f5;
+    --foreground: #4c4f69;
+    --primary: #d20f39;
+    --secondary: #7287fd;
+    --accent: #40a02b;
+    --muted: #acb0be;
+}
+
+/* Dark mode */
+:root[data-theme="dark"] {
+    --background: #1e1e2e;
+    --foreground: #cdd6f4;
+    --primary: #f38ba8;
+    --secondary: #89b4fa;
+    --accent: #a6e3a1;
+    --muted: #585b70;
+}
+
 body {
-  background-color: var(--ctp-base);
-  color: var(--ctp-text);
+  background-color: var(--background);
+  color: var(--foreground);
   transition: all 0.3s ease;
+  font-family: 'Noto Sans', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 #root {
@@ -40,7 +64,7 @@ body {
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 20px;
   background-color: var(--ctp-surface);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -77,6 +101,7 @@ h2 {
   border: 2px dashed var(--ctp-overlay);
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-top: 10px;
 }
 
 .file-input:hover {
@@ -85,7 +110,7 @@ h2 {
 }
 
 .file-info {
-  margin-top: 1rem;
+  margin-top: 10px;
   padding: 1rem;
   background-color: var(--ctp-surface);
   border-radius: 4px;
@@ -95,7 +120,7 @@ h2 {
 
 .format-select {
   padding: 0.75rem 1rem;
-  margin-right: 1rem;
+  margin-right: 10px;
   border-radius: 4px;
   border: 1px solid var(--ctp-overlay);
   background-color: var(--ctp-surface);
@@ -110,18 +135,16 @@ h2 {
 }
 
 .convert-button, .reset-button {
-  padding: 0.75rem 1.5rem;
+  padding: 10px 20px;
   margin: 0 0.5rem;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
   transition: all 0.2s;
-}
-
-.convert-button {
-  background-color: var(--ctp-blue);
-  color: var(--ctp-surface);
+  background-color: var(--accent);
+  color: var(--foreground);
+  margin-right: 10px;
 }
 
 .convert-button:hover:not(:disabled) {
@@ -129,8 +152,8 @@ h2 {
   transform: translateY(-2px);
 }
 
-.convert-button:disabled {
-  background-color: var(--ctp-overlay);
+.convert-button:disabled, .reset-button:disabled {
+  background-color: var(--muted);
   color: var(--ctp-subtext);
   cursor: not-allowed;
 }
@@ -151,15 +174,17 @@ h2 {
 }
 
 .error-message {
-  color: var(--ctp-red);
+  color: var(--primary);
   background-color: rgba(231, 130, 132, 0.2);
   padding: 1rem;
   border-radius: 4px;
   margin-bottom: 1rem;
+  margin-top: 10px;
 }
 
 .converting-indicator {
   margin: 2rem 0;
+  margin-top: 20px;
 }
 
 .converting-indicator p {
@@ -167,11 +192,13 @@ h2 {
 }
 
 .progress-bar {
-  height: 6px;
-  background-color: var(--ctp-surface);
+  height: 5px;
+  background-color: var(--muted);
   border-radius: 3px;
   overflow: hidden;
   position: relative;
+  width: 100%;
+  margin-top: 10px;
 }
 
 .progress-bar::after {
@@ -201,12 +228,14 @@ h2 {
   text-decoration: none;
   font-weight: bold;
   transition: all 0.3s;
+  color: var(--secondary);
 }
 
 .download-link:hover {
   background-color: var(--ctp-green);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-decoration: underline;
 }
 
 .logo {
@@ -246,4 +275,90 @@ h2 {
 
 .read-the-docs {
   color: var(--ctp-subtext);
+}
+
+.theme-toggle {
+  background-color: var(--primary);
+  color: var(--foreground);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.theme-toggle:hover {
+  background-color: var(--secondary);
+}
+
+.conversion-section {
+  margin-top: 20px;
+}
+
+.result-section {
+  margin-top: 20px;
+}
+
+/* Theme toggle styles */
+.theme-toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.theme-toggle-label {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.theme-toggle-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--muted);
+    transition: 0.4s;
+    border-radius: 24px;
+}
+
+.theme-toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--foreground);
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+.theme-toggle-input:checked + .theme-toggle-slider {
+    background-color: var(--primary);
+}
+
+.theme-toggle-input:checked + .theme-toggle-slider:before {
+    transform: translateX(26px);
+}
+
+/* Theme toggle icon styles */
+.theme-toggle-icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    color: var(--foreground);
 }
